@@ -64,7 +64,7 @@ const player1 = new Players("player1", 0, true)
 const player2 = new Players("player2", 0, false)
 
 //initialize the sattrting game conditions
-const init = () {
+function init  () {
     player1.score = 0;
     player2.score = 0;
     limbo = 0;
