@@ -15,34 +15,62 @@
 
 //cards will have 5 statistics fetched from pokemon api.
 
-//create the cards class
 //create players
 //create game loop
 //implement score adding
 //implement limbo 
 //impelment game ending
 
-//we start with fetching the data for 5 statistics and pokemon names
-let pokemonNameArr = [];
+//create the cards class
+class Cards {
+    constructor(name){
+        this.name = name
+        this.hp = null
+        this.attack = null
+        this.defense = null
+        this.specialAttack = null
+        this.specialDefense = null
+        this.speed = null
+    }
+}
 
-fetch("https://pokeapi.co/api/v2/pokemon?limit=30offset=200")
+//fetch the data from pokemon api adn create cards
+
+let pokemonArr = [];
+let pokemonStats = [];
+
+fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
 .then((response)=> response.json())
 .then((data) => {
 	data.results.forEach((data, i) => {
-        pokemonNameArr.push(data.name)
-        console.log(data)
+        pokemonArr.push(new Cards(`${data.name}`))
+
+        // console.log(data)
 		fetch(`https://pokeapi.co/api/v2/pokemon/${data.name}`)
 		.then((response1)=> response1.json())
 		.then((data) => {
-			// console.log(data.sprites.front_default)
-			console.log(data)
+            pokemonStats.push(data.stats)
+            pokemonArr[i].hp = data.stats[0].base_stat
+            pokemonArr[i].attack = data.stats[1].base_stat
+            pokemonArr[i].defense = data.stats[2].base_stat
+            pokemonArr[i].specialAttack =data.stats[3].base_stat
+            pokemonArr[i].specialDefense = data.stats[4].base_stat
+            pokemonArr[i].speed = data.stats[5].base_stat
+
+
+
+			// console.log(data.stats)
+
+		})
+    })})
+
+
+
+
+
+
 			// let pokemonImg = document.createElement("img")
 			// pokemonImg.src = data.sprites.front_default
 			// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
 			// pokemonImg.style.transform = "scale(2)"
 			// pokemonImg.style.margin = "30px"
-		})
-    })})
-    
-console.log()
-
