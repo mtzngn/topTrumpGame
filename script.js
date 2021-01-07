@@ -1,25 +1,8 @@
-//The game is played taking turns between one players’ hand of 15
-// cards and the other player’s hand. The cards have statistics on
-// them which will allow the user to pick an attribute and compare
-// that attribute with the other players’ top card; whoever has the
-// strongest chosen attribute, wins both cards. If the values are the
-// same, both cards go into limbo and whoever wins the next hand,
-// wins the limbo cards and the ones just battled. The winning
-// player of the hand continues to choose until they lose.
-
-
-//30 cards and several attributes for each card
+//30 cards colection of random pokemons with 5 statistics fetched from pokemon api
 //2 players turn by turn chooses an attribute to compare and higher one wins the cards.
 //who has the most cards at the end of game wins.
 //if attributes turns out to be equal than they go to limbo and will be added to next rounds winner.
 
-//cards will have 5 statistics fetched from pokemon api.
-
-//create players
-//create game loop
-//implement score adding
-//implement limbo 
-//impelment game ending
 
 //create the cards class
 class Cards {
@@ -33,11 +16,9 @@ class Cards {
         this.speed = null
     }
 }
-
 //fetch the data from pokemon api adn create cards
-
 let pokemonArr = [];
-let pokemonStats = [];
+//first we fetch the pokemon names and from their names we fetch their character information
 
 fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
 .then((response)=> response.json())
@@ -45,32 +26,65 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
 	data.results.forEach((data, i) => {
         pokemonArr.push(new Cards(`${data.name}`))
 
-        // console.log(data)
 		fetch(`https://pokeapi.co/api/v2/pokemon/${data.name}`)
 		.then((response1)=> response1.json())
 		.then((data) => {
-            pokemonStats.push(data.stats)
             pokemonArr[i].hp = data.stats[0].base_stat
             pokemonArr[i].attack = data.stats[1].base_stat
             pokemonArr[i].defense = data.stats[2].base_stat
             pokemonArr[i].specialAttack =data.stats[3].base_stat
             pokemonArr[i].specialDefense = data.stats[4].base_stat
             pokemonArr[i].speed = data.stats[5].base_stat
+        })})
+})
+//create players
+class Players {
+    constructor(name, score, chooseCard ) {
+        this.name = name
+        this.score = score
+        this.chooseCard = chooseCard
+    }
+    wonHand() {
+        this.score++
+        this.chooseCard = true
+    }
+    losthand() {
+        this.chooseCard = false
+    }
+    //implement the limbo win after
+
+}
+
+const player1 = new Players("player1", 0, true)
+const player2 = new Players("player2", 0, false)
+
+//create game loop
+
+
+//implement score adding
+//implement limbo 
+//impelment game ending
 
 
 
-			// console.log(data.stats)
-
-		})
-    })})
 
 
 
 
 
 
-			// let pokemonImg = document.createElement("img")
-			// pokemonImg.src = data.sprites.front_default
-			// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
-			// pokemonImg.style.transform = "scale(2)"
-			// pokemonImg.style.margin = "30px"
+
+
+
+
+
+
+
+
+
+
+// let pokemonImg = document.createElement("img")
+// pokemonImg.src = data.sprites.front_default
+// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
+// pokemonImg.style.transform = "scale(2)"
+// pokemonImg.style.margin = "30px"
