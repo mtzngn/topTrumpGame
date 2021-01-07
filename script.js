@@ -18,6 +18,8 @@ class Cards {
 }
 //fetch the data from pokemon api adn create cards
 let pokemonArr = [];
+let gameCards = []
+
 //first we fetch the pokemon names and from their names we fetch their character information
 
 fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
@@ -28,15 +30,17 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
 
 		fetch(`https://pokeapi.co/api/v2/pokemon/${data.name}`)
 		.then((response1)=> response1.json())
-		.then((data) => {
-            pokemonArr[i].hp = data.stats[0].base_stat
-            pokemonArr[i].attack = data.stats[1].base_stat
-            pokemonArr[i].defense = data.stats[2].base_stat
-            pokemonArr[i].specialAttack =data.stats[3].base_stat
-            pokemonArr[i].specialDefense = data.stats[4].base_stat
-            pokemonArr[i].speed = data.stats[5].base_stat
-        })})
-})
+		.then((data1) => {
+            pokemonArr[i].hp = data1.stats[0].base_stat
+            pokemonArr[i].attack = data1.stats[1].base_stat
+            pokemonArr[i].defense = data1.stats[2].base_stat
+            pokemonArr[i].specialAttack =data1.stats[3].base_stat
+            pokemonArr[i].specialDefense = data1.stats[4].base_stat
+            pokemonArr[i].speed = data1.stats[5].base_stat
+        })
+    })
+    }
+)
 //create players
 class Players {
     constructor(name, score, chooseCard ) {
@@ -54,37 +58,48 @@ class Players {
     //implement the limbo win after
 
 }
-
 const player1 = new Players("player1", 0, true)
 const player2 = new Players("player2", 0, false)
 
 //create game loop
+const pokemonGame = () => {
+    for (let i = 0; i < 30; i ++) {
+        gameCards[i] = pokemonArr[(Math.floor(Math.random() * 6 * i))]
+    }
+    let player1Cards = gameCards.slice(0, 15)
+    let player2Cards = gameCards.slice(15, 30)
+    let winner = false;
+    while(winner == false) {
+        for (let i = 0; i < player1Cards.length; i++) {
+            console.log(player1Cards[i])
+            console.log(player2Cards[i])
+            //show cards first, let user choose the attribute
+            let choosenAttribute = prompt("Which attribute would you like to choose?")
+            if(player1Cards[i][choosenAttribute] > player2Cards[i][choosenAttribute] ) {
+                player1.wonHand()
+                player2.losthand()
+                console.log("player 1 gets the point")
+            } else if (player1Cards[i][choosenAttribute] < player2Cards[i][choosenAttribute] ) {
+                player2.wonHand()
+                player1.losthand()
+                console.log("player2 gets the points")
+            } else {
+                console.log("it is a draw add the cards to limbo")
+            }
+            console.log(choosenAttribute)
+            //compare cards choosen attributes
+        }
+        console.log(player1)
+        console.log(player2)
+        winner = true
+    }
+
+
+}
+
+setTimeout(pokemonGame,1000)
 
 
 //implement score adding
 //implement limbo 
 //impelment game ending
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let pokemonImg = document.createElement("img")
-// pokemonImg.src = data.sprites.front_default
-// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
-// pokemonImg.style.transform = "scale(2)"
-// pokemonImg.style.margin = "30px"
