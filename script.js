@@ -18,7 +18,9 @@ class Cards {
 }
 //fetch the data from pokemon api adn create cards
 let pokemonArr = [];
-let gameCards = []
+let gameCards = [];
+let limbo = 0;
+
 
 //first we fetch the pokemon names and from their names we fetch their character information
 
@@ -61,8 +63,16 @@ class Players {
 const player1 = new Players("player1", 0, true)
 const player2 = new Players("player2", 0, false)
 
+//initialize the sattrting game conditions
+const init = () {
+    player1.score = 0;
+    player2.score = 0;
+    limbo = 0;
+}
 //create game loop
 const pokemonGame = () => {
+    init()
+    
     for (let i = 0; i < 30; i ++) {
         gameCards[i] = pokemonArr[(Math.floor(Math.random() * 6 * i))]
     }
@@ -78,13 +88,19 @@ const pokemonGame = () => {
             if(player1Cards[i][choosenAttribute] > player2Cards[i][choosenAttribute] ) {
                 player1.wonHand()
                 player2.losthand()
-                console.log("player 1 gets the point")
+                if (limbo != 0) {
+                    player1.score += limbo;
+                    limbo = 0;
+                }
             } else if (player1Cards[i][choosenAttribute] < player2Cards[i][choosenAttribute] ) {
                 player2.wonHand()
                 player1.losthand()
-                console.log("player2 gets the points")
+                if (limbo != 0) {
+                    player1.score += limbo;
+                    limbo = 0;
+                }
             } else {
-                console.log("it is a draw add the cards to limbo")
+                limbo++
             }
             console.log(choosenAttribute)
             //compare cards choosen attributes
@@ -103,3 +119,5 @@ setTimeout(pokemonGame,1000)
 //implement score adding
 //implement limbo 
 //impelment game ending
+    // PLAYER SCORES TO BE 0 
+    // limbo to be empty
