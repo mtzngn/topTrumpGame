@@ -25,7 +25,10 @@ let player2Score = document.getElementById("player2Score")
 
 let pokemonAttributes = document.getElementsByClassName("pokemonAttributes")
 let startB = document.getElementById("startB")
+let resetB = document.getElementById("resetB")
+
 startB.addEventListener("click", ()=>{init()})
+resetB.addEventListener("click", ()=>{init()})
 
 //create the cards class
 class Cards {
@@ -78,14 +81,12 @@ class Players {
     wonHand() {
         this.score++
         this.chooseCard = true
-        console.log(`it is now true for ${this.name}`)
     }
     losthand() {
         this.chooseCard = false
-        console.log(`it is now false for ${this.name}`)
     }
 }
-const player1 = new Players("player1", 0, true)
+const player1 = new Players("player1", 0, false)
 const player2 = new Players("player2", 0, false)
 
 
@@ -121,6 +122,7 @@ pokemonAttributes[1].childNodes.forEach((attr, i)=>{
 //initialize the sattrting game conditions
 function init  () {
     player1.score = 0;
+    player1.chooseCard = true;
     player2.score = 0;
     limbo = 0;
     updateDom()
@@ -135,6 +137,7 @@ setTimeout(() => {
     player1Cards = gameCards.slice(0, 15)
     player2Cards = gameCards.slice(15, 30)
     console.log(player1Cards)
+    console.log(player2Cards)
 }, 100);
     // show cards first, let user choose the attribute
 const updateDom = () => {
@@ -155,11 +158,9 @@ const updateDom = () => {
     player2Speed.innerText = player2Cards[roundNum].speed
 }
 
-
 //create game loop
 const pokemonGame = () => {
     //compare cards choosen attributes
-    console.log(`this round player1 is ${player1.choosenAttributeValue} and player2 has ${player2.choosenAttributeValue}`)
     if(player1.choosenAttributeValue > player2.choosenAttributeValue ) {
         player1.wonHand()
         player2.losthand()
@@ -168,7 +169,6 @@ const pokemonGame = () => {
             limbo = 0;
         }
     } else if (player1.choosenAttributeValue < player2.choosenAttributeValue ) {
-        console.log("heree")
         player2.wonHand()
         player1.losthand()
         if (limbo != 0) {
@@ -180,7 +180,6 @@ const pokemonGame = () => {
     }
     player1Score.innerText = player1.score
     player2Score.innerText = player2.score
-
 
     roundNum++
     updateDom()
@@ -196,12 +195,4 @@ const pokemonGame = () => {
     }
     console.log(player1.score)
     console.log(player2.score)
-
 }
-// setTimeout(pokemonGame,1000)
-
-// let pokemonImg = document.createElement("img")
-// pokemonImg.src = data.sprites.front_default
-// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
-// pokemonImg.style.transform = "scale(2)"
-// pokemonImg.style.margin = "30px"

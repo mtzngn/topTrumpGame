@@ -40,11 +40,7 @@ h1 {
     background-color: rgb(231, 111, 81);
 }
 
-#pokemonImg1 {
-    background: no-repeat;
-    background: cover;
-    background: center;
-}
+
 
 .pokemonAttributes {
     height: 35%;
@@ -81,7 +77,9 @@ button:active {
     background-color:  rgba(231, 111, 81, 1);
 }
 
-
+p:active {
+    background-color: rgb(231, 111, 81);
+}
 @media (max-width:900px) {
     .card {
         height: 50%;
