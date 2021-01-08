@@ -32,6 +32,8 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 black;
 }
 
 .pokemonImg {
@@ -39,8 +41,6 @@ h1 {
     width: 100%;
     background-color: rgb(231, 111, 81);
 }
-
-
 
 .pokemonAttributes {
     height: 35%;
@@ -58,7 +58,7 @@ h1 {
     position: relative;
     right: 50%;
     width: 15%;
-    height: 15%;
+    height: 25%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

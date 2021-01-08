@@ -26,6 +26,7 @@ let player2Score = document.getElementById("player2Score")
 let pokemonAttributes = document.getElementsByClassName("pokemonAttributes")
 let startB = document.getElementById("startB")
 let resetB = document.getElementById("resetB")
+let whoHasTurn = document.getElementById("whoHasTurn")
 
 startB.addEventListener("click", ()=>{init()})
 resetB.addEventListener("click", ()=>{init()})
@@ -81,6 +82,7 @@ class Players {
     wonHand() {
         this.score++
         this.chooseCard = true
+        whoHasTurn.innerText = `${this.name} has the turn`
     }
     losthand() {
         this.chooseCard = false
