@@ -101,7 +101,7 @@ pokemonAttributes[0].childNodes.forEach((attr, i)=>{
                 player2.choosenAttributeValue = `${pokemonAttributes[1].childNodes[i].childNodes[1].textContent}`
                 console.log(player1.choosenAttributeValue)
                 console.log(player2.choosenAttributeValue)
-                setTimeout(pokemonGame,1000)
+                setTimeout(pokemonGame,120)
             }
         })
     }
@@ -115,7 +115,7 @@ pokemonAttributes[1].childNodes.forEach((attr, i)=>{
                 player2.choosenAttributeValue = parseInt(`${pokemonAttributes[1].childNodes[i].childNodes[1].textContent}`)
                 console.log(player1.choosenAttributeValue)
                 console.log(player2.choosenAttributeValue)
-                setTimeout(pokemonGame,1000)
+                setTimeout(pokemonGame,120)
             }
         })
     }
@@ -166,6 +166,8 @@ setTimeout(createCards, 100);
 const updateDom = () => {
     pokemonName1.innerText = player1Cards[roundNum].name
     pokemonImg1.style.background =` url(${player1Cards[roundNum].img})`
+    pokemonImg1.style.backgroundRepeat = "no-repeat"
+    pokemonImg1.style.backgroundSize = "cover"
     player1Hp.innerText = player1Cards[roundNum].hp
     player1Attack.innerText = player1Cards[roundNum].attack
     player1Defense.innerText = player1Cards[roundNum].defense
@@ -174,6 +176,8 @@ const updateDom = () => {
     
     pokemonName2.innerText = player2Cards[roundNum].name
     pokemonImg2.style.background =` url(${player2Cards[roundNum].img})`
+    pokemonImg2.style.backgroundRepeat = "no-repeat"
+    pokemonImg2.style.backgroundSize = "cover"
     player2Hp.innerText = player2Cards[roundNum].hp
     player2Attack.innerText = player2Cards[roundNum].attack
     player2Defense.innerText = player2Cards[roundNum].defense
@@ -205,8 +209,8 @@ const pokemonGame = () => {
     player2Score.innerText = player2.score
 
     roundNum++
-    if (roundNum == 1) {
-        if (player1.score > player1.score) {
+    if (roundNum == 15) {
+        if (player1.score > player2.score) {
             alert(`winner is ${player1.name}`)
         } else {
             alert(`winner is ${player2.name}`)
