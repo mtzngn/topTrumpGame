@@ -92,7 +92,9 @@ class Players {
 const player1 = new Players("player1", 0, false)
 const player2 = new Players("player2", 0, false)
 
-
+//below code allows running pokemonGame function if any palyer allowed to choose.
+//it takes the elements of pokemonAttributes class and adding each of them eventlistner
+//first one for leftside(player1) second one is for player 2.
 pokemonAttributes[0].childNodes.forEach((attr, i)=>{
     if (i % 2 != 0) {
         pokemonAttributes[0].childNodes[i].addEventListener("click", ()=>{
@@ -106,7 +108,6 @@ pokemonAttributes[0].childNodes.forEach((attr, i)=>{
         })
     }
 })
- 
 pokemonAttributes[1].childNodes.forEach((attr, i)=>{
     if (i % 2 != 0) {
         pokemonAttributes[1].childNodes[i].addEventListener("click", ()=>{
@@ -121,7 +122,7 @@ pokemonAttributes[1].childNodes.forEach((attr, i)=>{
     }
 })
 
-//initialize the sattrting game conditions
+//initialize the starting game conditions
 function init  () {
     player1.score = 0;
     player1.chooseCard = true;
@@ -151,6 +152,7 @@ function reset () {
 
 let player1Cards = []
 let player2Cards = []
+//chooses random 30 cards from the pokemonArr and adds them seperatly to the players card array
 const createCards = () => {
     for (let i = 0; i < 30; i ++) {
         gameCards[i] = pokemonArr[(Math.floor(Math.random() * 6 * i))]
@@ -160,9 +162,9 @@ const createCards = () => {
     console.log(player1Cards)
     console.log(player2Cards)
 }
+//we use settimeout due to prevent async function  issues. takes sometime till we fetch the data from pokemon api
 setTimeout(createCards, 100);
 
-    // show cards first, let user choose the attribute
 const updateDom = () => {
     pokemonName1.innerText = player1Cards[roundNum].name
     pokemonImg1.style.background =` url(${player1Cards[roundNum].img})`
@@ -185,7 +187,7 @@ const updateDom = () => {
     player2Speed.innerText = player2Cards[roundNum].speed
 }
 
-//create game loop
+//below functions handles the game rounds, score calculations and decides if there is a winner 
 const pokemonGame = () => {
     //compare cards choosen attributes
     if(player1.choosenAttributeValue > player2.choosenAttributeValue ) {
@@ -209,6 +211,7 @@ const pokemonGame = () => {
     player2Score.innerText = player2.score
 
     roundNum++
+    //if round is 15 than it means game finished
     if (roundNum == 15) {
         if (player1.score > player2.score) {
             alert(`winner is ${player1.name}`)
@@ -217,9 +220,6 @@ const pokemonGame = () => {
         }
         init()
     }
-    
     updateDom()
 
-    console.log(player1.score)
-    console.log(player2.score)
 }
