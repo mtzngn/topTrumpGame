@@ -4,6 +4,9 @@ html, body {
 }
 h1 {
     text-align: center;
+    background-color: rgb(233, 196, 106);
+    margin: 0;
+    padding: 10px;
 }
 #topTrump {
     height: 100vh;
@@ -15,7 +18,7 @@ h1 {
 }
 #leftSide, #rightSide {
     height: 100vh;
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,5 +52,58 @@ h1 {
 .pokemonAttributes p {
     margin: 2px;
 }
-#pokemonName1 {
+#buttons {
+    position: relative;
+    right: 50%;
+    width: 15%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+button {
+    width: 150px;
+    height: 50px;
+    background-color: rgba(231, 111, 81, 0.8);
+    border: 1px solid rgb(231, 111, 81);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 black;
+    font-size: 1.2em;
+}
+button:active {
+    background-color:  rgba(231, 111, 81, 1);
+}
+
+
+@media (max-width:900px) {
+    .card {
+        height: 50%;
+        width:75%;
+    }
+    button {
+        width: 80px;
+        height: 30px;
+        font-size: 1.1em;
+
+    }
+
+
+}
+@media (max-width:414px) {
+    .card {
+        height: 50%;
+        width:95%;
+    }
+    button {
+        width: 50px;
+        height: 20px;
+        font-size: 1em;
+
+    }
+    #buttons {
+        top: 33%;
+    }
+
+
 }
