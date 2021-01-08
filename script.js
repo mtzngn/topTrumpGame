@@ -39,6 +39,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=200")
             pokemonArr[i].specialAttack =data1.stats[3].base_stat
             pokemonArr[i].specialDefense = data1.stats[4].base_stat
             pokemonArr[i].speed = data1.stats[5].base_stat
+            pokemonArr[i].img = data1.sprites.front_default
         })
     })
     }
@@ -78,6 +79,8 @@ const pokemonGame = () => {
     }
     let player1Cards = gameCards.slice(0, 15)
     let player2Cards = gameCards.slice(15, 30)
+    console.log(player1Cards)
+    console.log(player2Cards)
     let winner = false;
     while(winner == false) {
         for (let i = 0; i < player1Cards.length; i++) {
@@ -105,19 +108,23 @@ const pokemonGame = () => {
             console.log(choosenAttribute)
             //compare cards choosen attributes
         }
-        console.log(player1)
-        console.log(player2)
+
+        if (player1.score > player2.score) {
+            console.log(`The Winner is ${player1.name}`)
+        } else if (player1.score < player2.score) {
+            console.log(`The Winner is ${player2.name}`)
+        } 
+
         winner = true
     }
 
 
 }
 
-setTimeout(pokemonGame,1000)
+// setTimeout(pokemonGame,1000)
 
-
-//implement score adding
-//implement limbo 
-//impelment game ending
-    // PLAYER SCORES TO BE 0 
-    // limbo to be empty
+// let pokemonImg = document.createElement("img")
+// pokemonImg.src = data.sprites.front_default
+// document.getElementById(`cardDiv${i}`).appendChild(pokemonImg)
+// pokemonImg.style.transform = "scale(2)"
+// pokemonImg.style.margin = "30px"
