@@ -40,6 +40,12 @@ h1 {
     background-color: rgb(231, 111, 81);
 }
 
+#pokemonImg1 {
+    background: no-repeat;
+    background: cover;
+    background: center;
+}
+
 .pokemonAttributes {
     height: 35%;
     width: 100%;
