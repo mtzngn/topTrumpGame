@@ -13,7 +13,6 @@ let player1SpecialA = document.getElementById("player1SpecialA")
 let player1Speed = document.getElementById("player1Speed")
 let player1Score = document.getElementById("player1Score")
 
-
 let pokemonImg2 = document.getElementById("pokemonImg2")
 let player2Hp = document.getElementById("player2Hp")
 let player2Attack = document.getElementById("player2Attack")
@@ -29,7 +28,9 @@ let resetB = document.getElementById("resetB")
 let whoHasTurn = document.getElementById("whoHasTurn")
 
 startB.addEventListener("click", ()=>{init()})
-resetB.addEventListener("click", ()=>{init()})
+resetB.addEventListener("click", ()=>{
+    reset()
+})
 
 //create the cards class
 class Cards {
@@ -101,7 +102,6 @@ pokemonAttributes[0].childNodes.forEach((attr, i)=>{
                 console.log(player1.choosenAttributeValue)
                 console.log(player2.choosenAttributeValue)
                 setTimeout(pokemonGame,1000)
-                
             }
         })
     }
@@ -125,14 +125,33 @@ pokemonAttributes[1].childNodes.forEach((attr, i)=>{
 function init  () {
     player1.score = 0;
     player1.chooseCard = true;
+    player2.chooseCard = false;
     player2.score = 0;
+    player2Score.innerText = 0
+    player1Score.innerText = 0
+    whoHasTurn.innerText = "player1 has the turn"
     limbo = 0;
+    roundNum = 0;
     updateDom()
 }
+
+function reset () {
+    player1.score = 0;
+    player1.chooseCard = true;
+    player2.chooseCard = false;
+    player2.score = 0;
+    player2Score.innerText = 0
+    player1Score.innerText = 0
+    whoHasTurn.innerText = "player1 has the turn"
+    limbo = 0;
+    roundNum = 0;
+    setTimeout(createCards, 100);
+    setTimeout(updateDom, 110);
+}
+
 let player1Cards = []
 let player2Cards = []
-
-setTimeout(() => {
+const createCards = () => {
     for (let i = 0; i < 30; i ++) {
         gameCards[i] = pokemonArr[(Math.floor(Math.random() * 6 * i))]
     }
@@ -140,7 +159,9 @@ setTimeout(() => {
     player2Cards = gameCards.slice(15, 30)
     console.log(player1Cards)
     console.log(player2Cards)
-}, 100);
+}
+setTimeout(createCards, 100);
+
     // show cards first, let user choose the attribute
 const updateDom = () => {
     pokemonName1.innerText = player1Cards[roundNum].name
@@ -184,17 +205,17 @@ const pokemonGame = () => {
     player2Score.innerText = player2.score
 
     roundNum++
-    updateDom()
-
-    if((player1.score + player2.score) == 15) {
-        console.log("game finished")
+    if (roundNum == 1) {
         if (player1.score > player1.score) {
-            console.log(`winner is ${player1.name}`)
+            alert(`winner is ${player1.name}`)
         } else {
-            console.log(`winner is ${player2.name}`)
+            alert(`winner is ${player2.name}`)
         }
         init()
     }
+    
+    updateDom()
+
     console.log(player1.score)
     console.log(player2.score)
 }
