@@ -2,7 +2,7 @@
 //2 players turn by turn chooses an attribute to compare and higher one wins the cards.
 //who has the most cards at the end of game wins.
 //if attributes turns out to be equal than they go to limbo and will be added to next rounds winner.
-
+//******************************************************************************************/
 //creating the variables for DOM manipulation
 let pokemonName1 = document.getElementById("pokemonName1")
 let pokemonImg1 = document.getElementById("pokemonImg1")
@@ -27,11 +27,11 @@ let startB = document.getElementById("startB")
 let resetB = document.getElementById("resetB")
 let whoHasTurn = document.getElementById("whoHasTurn")
 
-startB.addEventListener("click", ()=>{init()})
+startB.addEventListener("click", ()=>{
+    init()})
 resetB.addEventListener("click", ()=>{
     reset()
 })
-
 //create the cards class
 class Cards {
     constructor(name){
@@ -44,7 +44,7 @@ class Cards {
         this.speed = null
     }
 }
-//fetch the data from pokemon api adn create cards
+
 let pokemonArr = [];
 let gameCards = [];
 let limbo = 0;
@@ -94,28 +94,25 @@ const player2 = new Players("player2", 0, false)
 
 //below code allows running pokemonGame function if any palyer allowed to choose.
 //it takes the elements of pokemonAttributes class and adding each of them eventlistner
-//first one for leftside(player1) second one is for player 2.
+
 pokemonAttributes[0].childNodes.forEach((attr, i)=>{
     if (i % 2 != 0) {
         pokemonAttributes[0].childNodes[i].addEventListener("click", ()=>{
             if (player1.chooseCard == true) {
                 player1.choosenAttributeValue = parseInt(`${pokemonAttributes[0].childNodes[i].childNodes[1].textContent}`)
-                player2.choosenAttributeValue = `${pokemonAttributes[1].childNodes[i].childNodes[1].textContent}`
-                console.log(player1.choosenAttributeValue)
-                console.log(player2.choosenAttributeValue)
+                player2.choosenAttributeValue = parseInt(`${pokemonAttributes[1].childNodes[i].childNodes[1].textContent}`)
                 setTimeout(pokemonGame,120)
             }
         })
     }
 })
+
 pokemonAttributes[1].childNodes.forEach((attr, i)=>{
     if (i % 2 != 0) {
         pokemonAttributes[1].childNodes[i].addEventListener("click", ()=>{
             if(player2.chooseCard == true) {
                 player1.choosenAttributeValue = parseInt(`${pokemonAttributes[0].childNodes[i].childNodes[1].textContent}`)
                 player2.choosenAttributeValue = parseInt(`${pokemonAttributes[1].childNodes[i].childNodes[1].textContent}`)
-                console.log(player1.choosenAttributeValue)
-                console.log(player2.choosenAttributeValue)
                 setTimeout(pokemonGame,120)
             }
         })
@@ -133,6 +130,9 @@ function init  () {
     whoHasTurn.innerText = "player1 has the turn"
     limbo = 0;
     roundNum = 0;
+    if (startB.style.display == "none") {
+        startB.style.display = ""
+    } else {startB.style.display = "none"}
     updateDom()
 }
 
