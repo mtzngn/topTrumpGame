@@ -1,23 +1,28 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-image: url("./assets/pokemonBg.jpg");
+    background-image: url("./assets/pokemonBg2.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow: inset 0 0 0 1000px rgba(42, 157, 143, 0.6);
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
 }
 h1 {
     text-align: center;
-    background-color: rgba(233, 196, 106, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+    color:rgba(233, 196, 106, 1);
     margin: 0;
     padding: 10px;
+    position: relative;
+
 }
 #instruction {
     text-align: center;
-    background-color: rgba(233, 196, 106, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgba(233, 196, 106, 1);
     margin: 0;
     padding: 10px;
+    position: relative;
 }
 
 #topTrump {
@@ -39,7 +44,7 @@ h1 {
 .card {
     height: 50%;
     width: 45%;
-    background-color: rgba(233, 196, 106, 1);
+    background-color: rgba(233, 196, 106, 0.9);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,9 +56,13 @@ h1 {
 .pokemonImg {
     height: 60%;
     width: 100%;
-    background-color: rgb(231, 111, 81);
+    background-color: rgba(231, 111, 81);
     background-position: center center;
     background-repeat: no-repeat;
+    border-bottom: 1px solid black;
+    border-radius: 25px;
+    box-shadow: 0 2px 4px 0 black;
+    max-width: 165px;
 
 }
 
@@ -95,25 +104,18 @@ button {
 button:active {
     background-color:  rgba(231, 111, 81, 1);
 }
+p {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-radius: 25px;
 
+}
 p:active {
     background-color: rgb(231, 111, 81);
     font-size: 1.1em;
 }
-@media (max-width:900px) {
-    .card {
-        height: 50%;
-        width:75%;
-    }
-    button {
-        width: 80px;
-        height: 30px;
-        font-size: 1.2em;
 
-    }
-
-
-}
 @media (max-width:414px) {
     .card {
         height: 50%;
