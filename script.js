@@ -149,16 +149,15 @@ function reset () {
     setTimeout(createCards, 100);
     setTimeout(updateDom, 110);
 }
-
 let player1Cards = []
 let player2Cards = []
 //chooses random 30 cards from the pokemonArr and adds them seperatly to the players card array
 const createCards = () => {
-    for (let i = 0; i < 30; i ++) {
-        gameCards[i] = pokemonArr[(Math.floor(Math.random() * 6 * i))]
+    for (let i = 1; i < 31; i ++) {
+        gameCards[i] = pokemonArr[(Math.floor(Math.random() * 200))]
     }
-    player1Cards = gameCards.slice(0, 15)
-    player2Cards = gameCards.slice(15, 30)
+    player1Cards = gameCards.slice(1, 16)
+    player2Cards = gameCards.slice(16, 31)
     console.log(player1Cards)
     console.log(player2Cards)
 }
